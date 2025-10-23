@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Logistics Dispatcher</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header-controls">
+            <div class="language-selector">
+                <button id="langToggle">🌐 UA/EN</button>
+            </div>
+            <button id="settingsBtn" class="settings-btn">⚙️</button>
+        </div>
+        
+        <!-- Модальне вікно налаштувань -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>API Settings</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="openaiKey">OpenAI API Key:</label>
+                        <input type="password" id="openaiKey" name="openaiKey" placeholder="Enter OpenAI API key">
+                    </div>
+                    <div class="form-group">
+                        <label for="datKey">DAT API Key:</label>
+                        <input type="password" id="datKey" name="datKey" placeholder="Enter DAT API key">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-primary" id="saveSettings">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>AI Dispatcher - 5-Day Route Planner</h2>
+        
+        <form class="dispatch-form" id="dispatchForm">
+        
+            <div class="form-section">
+                <h3>Departure</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="originCity">City of Departure:</label>
+                        <input type="text" id="originCity" name="originCity" placeholder="Enter city name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departureDateTime">Date and Time of Departure:</label>
+                        <input type="datetime-local" id="departureDateTime" name="departureDateTime" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Load Parameters</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="searchRadius">Search Radius (miles):</label>
+                        <input type="number" id="searchRadius" name="searchRadius" min="0" value="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxDeadhead">Max. Deadhead (miles):</label>
+                        <input type="number" id="maxDeadhead" name="maxDeadhead" min="0" value="100" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="minPrice">Min. Price ($):</label>
+                        <input type="number" id="minPrice" name="minPrice" min="0" value="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="minRate">Min. Rate ($/mile):</label>
+                        <input type="number" id="minRate" name="minRate" min="0" step="0.01" value="3.50" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cargoWeight">Cargo Weight (lbs):</label>
+                        <input type="number" id="cargoWeight" name="cargoWeight" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cargoVolume">Cargo Volume (cu ft):</label>
+                        <input type="number" id="cargoVolume" name="cargoVolume" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="trailerType">Trailer Type:</label>
+                    <select id="trailerType" name="trailerType" required>
+                        <option value="">Select trailer type</option>
+                        <option value="dry_van">Dry Van</option>
+                        <option value="reefer">Reefer</option>
+                        <option value="flatbed">Flatbed</option>
+                        <option value="step_deck">Step Deck</option>
+                        <option value="lowboy">Lowboy</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Destination</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="destinationCity">City of Destination:</label>
+                        <input type="text" id="destinationCity" name="destinationCity" placeholder="Enter city name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arrivalDateTime">Critical Arrival Date/Time:</label>
+                        <input type="datetime-local" id="arrivalDateTime" name="arrivalDateTime" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Generate 5-Day Route Plan</button>
+            </div>
+        </form>
+    </div>
+    <script src="/js/settings.js"></script>
+</body>
+</html>
